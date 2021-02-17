@@ -1,1 +1,6 @@
 utils/cache/*
+*__pypackages__
+*.pak
+*.ipynb_checkpoints
+*.pyc
+*__pycache__
