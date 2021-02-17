@@ -4,3 +4,4 @@ utils/cache/*
 *.ipynb_checkpoints
 *.pyc
 **/__pycache__
+progress.txt
