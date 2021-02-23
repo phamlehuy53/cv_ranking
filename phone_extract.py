@@ -26,6 +26,15 @@ PHONE_CNF = {
 # %%
 
 def valid_phonenum( phone_num: str ):
+    """
+
+    Args:
+        phone_num: Phone number
+
+    Returns:
+        bool: valided, str: parsed phone number
+
+    """
     pro_num = re.sub(r"\+|\-|\(|\)|\s", "", phone_num)
 
     # Check non-digit
@@ -54,5 +63,6 @@ def valid_phonenum( phone_num: str ):
     # if not v:
     return v, pro_num
 
-
+def rank_info(phone_num: str):
+    
 
