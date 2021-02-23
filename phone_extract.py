@@ -65,4 +65,5 @@ def valid_phonenum( phone_num: str ):
 
 def rank_info(phone_num: str):
     
+    pass
 
