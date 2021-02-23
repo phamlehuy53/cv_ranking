@@ -6,3 +6,6 @@ utils/cache/*
 **/__pycache__
 progress.txt
 **/cache/*
+
+
+progress.txt

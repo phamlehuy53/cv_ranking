@@ -17,7 +17,8 @@ OUTTAB = "a"*17 + "o"*17 + "e"*11 + "u"*11 + "i"*5 + "y"*5 + "d"
 R = re.compile("|".join(INTAB))
 replaces_dict = dict(zip(INTAB, OUTTAB))
 # TODO: case-sensitive not implemented
-def remove_sign(utf8_str):
+# def remove_sign(utf8_str):
+def remove_diacritic(utf8_str):
     return R.sub(lambda m: replaces_dict[m.group(0)], utf8_str)
 
 def remove_html_tag(text: str, repl=''):
