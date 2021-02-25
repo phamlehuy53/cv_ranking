@@ -13,3 +13,4 @@ progress.*
 .idea/inspectionProfiles/Project_Default.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/cv_ranking.iml
+spell.h5
