@@ -1,5 +1,6 @@
 import re
 from fuzzywuzzy import fuzz
+from utils.spell_checker import correct
 
 email_address_rank = [0, 5]
 experience_year_range = [[0, 1], [1, 2], [2, 3], [3, 5], [5, 100]]
@@ -162,3 +163,7 @@ def pointing_interest(interest):
     return interest_point[0]
 
 
+def pointing_spell(candidate_info):
+    if candidate_info == correct(candidate_info):
+        return True
+    return False
