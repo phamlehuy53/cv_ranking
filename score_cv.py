@@ -6,6 +6,7 @@ email_address_rank = [0, 5]
 experience_year_range = [[0, 1], [1, 2], [2, 3], [3, 5], [5, 100]]
 skill_range = [[0, 1], [1, 2], [3, 4], [4, 5], [5, 100]]
 soft_skill_range = [[0, 1], [1, 2], [3, 4], [4, 5], [5, 100]]
+diploma_range = [[0, 1], [1, 2], [3, 4], [4, 5], [5, 100]]
 is_update_point = [0, 5]
 address_now_point = [0, 5]
 cv_image_point = [3, 5]
@@ -92,6 +93,14 @@ def pointing_soft_skill(soft_skill):
     number_of_soft_skills = len(soft_skill)
     for i in range(len(soft_skill_range)):
         if number_of_soft_skills in range(soft_skill_range[i][0], soft_skill_range[i][1]):
+            return i + 1
+    return 0
+
+
+def pointing_diploma(diploma):
+    number_of_diploma = len(diploma)
+    for i in range(len(diploma_range)):
+        if number_of_diploma in range(diploma_range[i][0], diploma_range[i][1]):
             return i + 1
     return 0
 
