@@ -9,6 +9,7 @@ soft_skill_range = [[0, 1], [1, 2], [3, 4], [4, 5], [5, 100]]
 diploma_range = [[0, 1], [1, 2], [3, 4], [4, 5], [5, 100]]
 is_update_point = [0, 5]
 address_now_point = [0, 5]
+reference_person_point = [0, 5]
 cv_image_point = [3, 5]
 interest_point = [0, 3, 5]
 personal_summary_coefficient = {
@@ -138,7 +139,7 @@ def pointing_email_address(email_address, fullname):
     name_split = fullname.split(" ")
     email_name = email_address.split('@')[0]
     if fuzz.ratio(fullname_no_space, email_name) > 0.5:
-        return email_address_rank[0]
+        return email_address_rank[1]
     acronym_name_1 = ''
     acronym_name_2 = ''
     for i in range(len(name_split) - 1):
@@ -176,3 +177,12 @@ def pointing_spell(candidate_info):
     if candidate_info == correct(candidate_info):
         return True
     return False
+
+
+def pointing_reference_person(reference_person):
+    if reference_person is not None:
+        return reference_person_point[1]
+    return reference_person_point[0]
+
+
+
