@@ -1,59 +1,114 @@
 class Person:
-    CanId = 9310
-    CanCode = "Luong Van Ly"
-    CanFullName = "Lương Văn Lý"
-    CanDob = None
-    CanAddress1 = None
-    CanAddress2 = None
-    CanEmail = "coolboy90tlhp@gmail.com"
-    CanTelNum = "0979182440"
-    CanEthnic = None
-    CanReligion = None
-    CanImgCandi = "dist/img/userIcon.png "
-    CreateBy = 42
-    CreateDate = "2018-12-21T04:39:21 "
-    UpdateBy = 43
-    UpdateDate = None
-    IsDelete = False
-    CanNominee = None
-    CateId = None
-    CanIsMarried = None
-    CanNationality = None
-    CanFileCv = "http=//jobbox.vn/Uploads/LuongVanLy.docx"
-    CanIdentityName = None
-    CanNearestWork = None
-    CanSourceProfile = "recruiter"
-    CanTimeRecruitment = None
-    CanEvaluate = None
-    CanNote = None
-    CanTalentPoolId = None
-    SexCode = "SEX-02"
-    RecruitNewsId = None
-    GroupRoundId = None
-    RoundRecruitId = None
-    OrganizationId = 28
-    ApplyNo = 1
-    CanIdPublish = None
-    IsCheckNotifycation = None
-    IsCheckWebsite = None
-    IsCheckRead = None
-    Years = None
-    Career = None
-    Nominee = None
-    IsStatus = None
+    def __init__(self, CanId,
+                 CanCode,
+                 CanFullName,
+                 CanDob,
+                 CanAddress1,
+                 CanAddress2,
+                 CanEmail,
+                 CanTelNum,
+                 CanEthnic,
+                 CanReligion,
+                 CanImgCand,
+                 CreateBy,
+                 CreateDate,
+                 UpdateBy,
+                 UpdateDate,
+                 IsDelete,
+                 CanNominee,
+                 CateId,
+                 CanIsMarried,
+                 CanNationality,
+                 CanFileCv,
+                 CanIdentityName,
+                 CanNearestWork,
+                 CanSourceProfile,
+                 CanTimeRecruitment,
+                 CanEvaluate,
+                 CanNote,
+                 CanTalentPoolId,
+                 SexCode,
+                 RecruitNewsId,
+                 GroupRoundId,
+                 RoundRecruitId,
+                 OrganizationId,
+                 ApplyNo,
+                 CanIdPublish,
+                 IsCheckNotifycation,
+                 IsCheckWebsite,
+                 IsCheckRead,
+                 Years,
+                 Career,
+                 Nominee,
+                 IsStatus,
+                 FullTexts,
+                 Skill,
+                 Diploma,
+                 Experience,
+                 Interest,
+                 CompanyNow,
+                 WorkNow,
+                 FutureGoals,
+                 SoftSkill,
+                 ReferencePerson,
+                 AddressNow,
+                 Project,
+                 IsUpdate,
+                 Point):
+        self.CanId = CanId
+        self.CanCode = CanCode
+        self.CanFullName = CanFullName
+        self.CanDob = CanDob
+        self.CanAddress1 = CanAddress1
+        self.CanAddress2 = CanAddress2
+        self.CanEmail = CanEmail
+        self.CanTelNum = CanTelNum
+        self.CanEthnic = CanEthnic
+        self.CanReligion = CanReligion
+        self.CanImgCand = CanImgCand
+        self.CreateBy = CreateBy
+        self.CreateDate = CreateDate
+        self.UpdateBy = UpdateBy
+        self.UpdateDate = UpdateDate
+        self.IsDelete = IsDelete
+        self.CanNominee = CanNominee
+        self.CateId = CateId
+        self.CanIsMarried = CanIsMarried
+        self.CanNationality = CanNationality
+        self.CanFileCv = CanFileCv
+        self.CanIdentityName = CanIdentityName
+        self.CanNearestWork = CanNearestWork
+        self.CanSourceProfile = CanSourceProfile
+        self.CanTimeRecruitment = CanTimeRecruitment
+        self.CanEvaluate = CanEvaluate
+        self.CanNote = CanNote
+        self.CanTalentPoolId = CanTalentPoolId
+        self.SexCode = SexCode
+        self.RecruitNewsId = RecruitNewsId
+        self.GroupRoundId = GroupRoundId
+        self.RoundRecruitId = RoundRecruitId
+        self.OrganizationId = OrganizationId
+        self.ApplyNo = ApplyNo
+        self.CanIdPublish = CanIdPublish
+        self.IsCheckNotifycation = IsCheckNotifycation
+        self.IsCheckWebsite = IsCheckWebsite
+        self.IsCheckRead = IsCheckRead
+        self.Years = Years
+        self.Career = Career
+        self.Nominee = Nominee
+        self.IsStatus = IsStatus
+        self.FullTexts = FullTexts
+        self.Skill = Skill
+        self.Diploma = Diploma
+        self.Experience = Experience
+        self.Interest = Interest
+        self.CompanyNow = CompanyNow
+        self.WorkNow = WorkNow
+        self.FutureGoals = FutureGoals
+        self.SoftSkill = SoftSkill
+        self.ReferencePerson = ReferencePerson
+        self.AddressNow = AddressNow
+        self.Project = Project
+        self.IsUpdate = IsUpdate
+        self.Point = Point
 
-    Point = None
-
-    FullTexts = None
-    Skill = None
-    Diploma = None
-    Experience = None
-    Interest = None
-    CompanyNow = None
-    WorkNow = None
-    FutureGoals = None
-    SoftSkill = None
-    ReferencePerson = None
-    AddressNow = None
-    Project = None
-    IsUpdate = None

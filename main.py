@@ -1,6 +1,9 @@
 from utils.person_info import Person
 from utils.score_cv import *
-from ranking import *
+from utils.ranking import *
+
+NUMBER_OF_CRITERIA = 12
+
 
 def pointing_cv(candidate: Person):
     point = 0
@@ -25,7 +28,8 @@ def pointing_cv(candidate: Person):
                                        candidate.Career)
     point = point + pointing_personal_summary(personal_summary)
     point = point + pointing_spell(candidate)
+    point = point + pointing_diploma(candidate.Diploma)
     point = point + rank_diploma(candidate.Diploma)
+    point = point + pointing_tel_num(candidate.CanTelNum)
     # point = point + rank_introduction()
-
-    return point
+    return point/NUMBER_OF_CRITERIA

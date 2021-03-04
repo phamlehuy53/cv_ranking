@@ -2,6 +2,7 @@ import re
 from fuzzywuzzy import fuzz
 from utils.spell_checker import correct
 from utils.person_info import Person
+from utils.phone_extract import *
 
 email_address_rank = [0, 5]
 experience_year_range = [[0, 1], [1, 2], [2, 3], [3, 5], [5, 100]]
@@ -14,6 +15,7 @@ reference_person_point = [0, 5]
 cv_image_point = [3, 5]
 interest_point = [0, 3, 5]
 spell_point = [3, 5]
+phone_number_point = [3,5]
 personal_summary_coefficient = {
     'CanFullName': 1,
     'CanDob': 1,
@@ -120,10 +122,10 @@ def pointing_address(address_now):
 
 
 def pointing_tel_num(tel_num):
-    tel_num_reg = r"^[0]{1}[0-9]{9}$"
-    if len(re.findall(tel_num_reg, tel_num)) == 1:
-        return True
-    return False
+    valid_check, phone = valid_phonenum(tel_num)
+    if valid_check:
+        return phone_number_point[1]
+    return phone_number_point[0]
 
 
 def pointing_cv_image(cv_image):
