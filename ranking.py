@@ -20,11 +20,13 @@ from pyvi import ViTokenizer
 # %%
 # TODO: validate tyep-engine. e.g not Unicode
 
-JOB_KWS = set(map( lambda x: x[:-1], open('./data/Job-keywords.txt', 'r').readlines()))
+JOB_KWS = set(map(lambda x: x[:-1], open('./data/Job-keywords.txt', 'r').readlines()))
+
+
 def rank_diploma(in_text: str):
     star = 1
     if not in_text:
-        return start
+        return star
     # Khong co truong tot nghiep -> 1*
     edu = ['đại học',
            'cao đẳng',
@@ -56,6 +58,7 @@ def rank_diploma(in_text: str):
         star = gra_lv[mtc_lv[0][1]]
     return star
 
+
 def rank_introduction(in_text: str):
     star = 1
     if not in_text:
@@ -70,6 +73,6 @@ def rank_introduction(in_text: str):
     # print(tokens)
     matched_tokens = tokens.intersection(JOB_KWS)
     # print(matched_tokens)
-    if len(matched_tokens)>=len(tokens)/10:
+    if len(matched_tokens) >= len(tokens) / 10:
         star = 5
     return star
