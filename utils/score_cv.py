@@ -1,6 +1,7 @@
 import re
 from fuzzywuzzy import fuzz
 from utils.spell_checker import correct
+from utils.person_info import Person
 
 email_address_rank = [0, 5]
 experience_year_range = [[0, 1], [1, 2], [2, 3], [3, 5], [5, 100]]
@@ -12,6 +13,7 @@ address_now_point = [0, 5]
 reference_person_point = [0, 5]
 cv_image_point = [3, 5]
 interest_point = [0, 3, 5]
+spell_point = [3, 5]
 personal_summary_coefficient = {
     'CanFullName': 1,
     'CanDob': 1,
@@ -26,34 +28,33 @@ personal_summary_coefficient = {
     'CanNearestWork': 1,
     'Career': 1,
 }
-personal_attribute = ['CanFullName',
-                      'CanDob',
-                      'CanAddress1',
-                      'CanEmail',
-                      'CanTelNum',
-                      'CanEthnic',
-                      'CanReligion',
-                      'CanNominee',
-                      'CanNationality',
-                      'CanIdentityName',
-                      'CanNearestWork',
-                      'Career',
-                      'SumOfCoefficient']
 
 
 class PersonalSummary:
-    CanFullName = ''
-    CanDob = ''
-    CanAddress1 = ''
-    CanEmail = ''
-    CanTelNum = ''
-    CanEthnic = ''
-    CanReligion = ''
-    CanNominee = ''
-    CanNationality = ''
-    CanIdentityName = ''
-    CanNearestWork = ''
-    Career = ''
+    def __init__(self, CanFullName,
+                 CanDob,
+                 CanAddress1,
+                 CanEmail,
+                 CanTelNum,
+                 CanEthnic,
+                 CanReligion,
+                 CanNominee,
+                 CanNationality,
+                 CanIdentityName,
+                 CanNearestWork,
+                 Career):
+        self.Career = Career
+        self.CanNearestWork = CanNearestWork
+        self.CanIdentityName = CanIdentityName
+        self.CanNationality = CanNationality
+        self.CanNominee = CanNominee
+        self.CanReligion = CanReligion
+        self.CanEthnic = CanEthnic
+        self.CanTelNum = CanTelNum
+        self.CanEmail = CanEmail
+        self.CanAddress1 = CanAddress1
+        self.CanDob = CanDob
+        self.CanFullName = CanFullName
 
 
 def no_accent_vietnamese(s):
@@ -159,7 +160,9 @@ def pointing_email_address(email_address, fullname):
 def pointing_personal_summary(person_sum: PersonalSummary):
     summary_point = 0
     sum_of_coefficient = 0
-    for attr in personal_attribute:
+    for attr in PersonalSummary.__dict__.keys():
+        if attr.find("__") != -1:
+            continue
         value = person_sum.__getattribute__(attr)
         sum_of_coefficient = sum_of_coefficient + personal_summary_coefficient[attr]
         if value is not None:
@@ -173,10 +176,20 @@ def pointing_interest(interest):
     return interest_point[0]
 
 
-def pointing_spell(candidate_info):
+def check_spell(candidate_info):
     if candidate_info == correct(candidate_info):
         return True
     return False
+
+
+def pointing_spell(candidate: Person):
+    for attr in Person.__dict__.keys():
+        if attr.find("__") != -1:
+            continue
+        value = candidate.__getattribute__(attr)
+        if not check_spell(candidate_info=value):
+            return spell_point[0]
+    return spell_point[1]
 
 
 def pointing_reference_person(reference_person):
@@ -185,4 +198,4 @@ def pointing_reference_person(reference_person):
     return reference_person_point[0]
 
 
-
+pointing_spell()
