@@ -200,4 +200,4 @@ def pointing_reference_person(reference_person):
     return reference_person_point[0]
 
 
-pointing_spell()
+
