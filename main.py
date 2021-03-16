@@ -10,7 +10,7 @@ NUMBER_OF_CRITERIA = 12
 FEATURE_SCORING = {
     'info': {
         'feature': ['CanEmail', 'CanTelNum', 'CanFullName'],
-        'fn': None
+        'fn': pointing_person_info
     },
     'introduction': {
         'feature': ['CanDob', 'SexCode', 'CanAddress', 'CanNationality', 'Interest', 'Strength', 'FutureGoals'],
@@ -18,15 +18,15 @@ FEATURE_SCORING = {
     },
     'experience': {
         'features': ['ExperienceYears'],
-        'fn': None
+        'fn': pointing_experience_year
     },
     'soft_skill': {
         'features': ['SoftSkill'],
-        'fn': None
+        'fn': pointing_soft_skill
     },
     'skill': {
         'features': ['Skill'],
-        'fn': None
+        'fn': pointing_skill
     },
     'graduated': {
         'features': ['LearningDiploma', 'Specialize'],
@@ -34,7 +34,7 @@ FEATURE_SCORING = {
     },
     'is_updated': {
         'features': ['IsUpdate'],
-        'fn': None
+        'fn': pointing_update_cv
     },
     'learning_awards': {
         'features': ['LearningAwards'],
@@ -46,11 +46,11 @@ FEATURE_SCORING = {
     },
     'diploma': {
         'features': ['Diploma'],
-        'fn': None
+        'fn': pointing_diploma
     },
     'cv_image': {
         'features': ['CanImgCand'],
-        'fn': None
+        'fn': pointing_cv_image
     },
     'language': {
         'features': ['LanguageCertificate'],
