@@ -6,9 +6,9 @@ from utils.phone_extract import *
 
 email_address_rank = [0, 5]
 experience_year_range = [[0, 1], [1, 2], [2, 3], [3, 5], [5, 100]]
-skill_range = [[0, 1], [1, 2], [3, 4], [4, 5], [5, 100]]
-soft_skill_range = [[0, 1], [1, 2], [3, 4], [4, 5], [5, 100]]
-diploma_range = [[0, 1], [1, 2], [3, 4], [4, 5], [5, 100]]
+skill_range = [[0, 1], [1, 3], [3, 4], [4, 5], [5, 100]]
+soft_skill_range = [[0, 1], [1, 3], [3, 4], [4, 5], [5, 100]]
+diploma_range = [[0, 1], [1, 3], [3, 4], [4, 5], [5, 100]]
 is_update_point = [0, 5]
 address_now_point = [0, 5]
 reference_person_point = [0, 5]
@@ -86,6 +86,7 @@ def pointing_experience_year(years):
 
 
 def pointing_skill(skill):
+    skill = skill.split(";")
     number_of_skills = len(skill)
     for i in range(len(skill_range)):
         if number_of_skills in range(skill_range[i][0], skill_range[i][1]):
@@ -94,6 +95,7 @@ def pointing_skill(skill):
 
 
 def pointing_soft_skill(soft_skill):
+    soft_skill = soft_skill.split(";")
     number_of_soft_skills = len(soft_skill)
     for i in range(len(soft_skill_range)):
         if number_of_soft_skills in range(soft_skill_range[i][0], soft_skill_range[i][1]):
@@ -102,6 +104,7 @@ def pointing_soft_skill(soft_skill):
 
 
 def pointing_diploma(diploma):
+    diploma = diploma.split(";")
     number_of_diploma = len(diploma)
     for i in range(len(diploma_range)):
         if number_of_diploma in range(diploma_range[i][0], diploma_range[i][1]):
@@ -110,15 +113,9 @@ def pointing_diploma(diploma):
 
 
 def pointing_update_cv(is_update):
-    if is_update:
+    if is_update.lower() == 'yes' or is_update.lower().find("yes") != -1:
         return is_update_point[1]
     return is_update_point[0]
-
-
-def pointing_address(address_now):
-    if address_now is not None:
-        return address_now_point[1]
-    return address_now_point[0]
 
 
 def pointing_tel_num(tel_num):
@@ -129,19 +126,21 @@ def pointing_tel_num(tel_num):
 
 
 def pointing_cv_image(cv_image):
-    if cv_image is not None:
+    if cv_image != "" and cv_image.lower().find("none") != 0:
         return cv_image_point[1]
     return cv_image_point[0]
 
 
 def pointing_email_address(email_address, fullname):
+    if email_address.lower().find("none") == 0 or fullname.lower().find("none") == 0:
+        return 0
     email_address_point = 0
     fullname = fullname.lower()
     fullname = no_accent_vietnamese(fullname)
     fullname_no_space = fullname.replace(" ", '')
     name_split = fullname.split(" ")
     email_name = email_address.split('@')[0]
-    if fuzz.ratio(fullname_no_space, email_name) > 0.5:
+    if fuzz.ratio(fullname_no_space, email_name) > 50:
         return email_address_rank[1]
     acronym_name_1 = ''
     acronym_name_2 = ''
@@ -150,7 +149,6 @@ def pointing_email_address(email_address, fullname):
     acronym_name_2 = acronym_name_2 + name_split[len(name_split) - 2][0] + name_split[len(name_split) - 1][0]
     name_split.append(acronym_name_1)
     name_split.append(acronym_name_2)
-    print(acronym_name_2)
     for checker in name_split:
         if email_name.find(checker) != -1:
             email_address_point = email_address_point + 1
@@ -195,9 +193,13 @@ def pointing_spell(candidate: Person):
 
 
 def pointing_reference_person(reference_person):
-    if reference_person is not None:
+    if reference_person != "" and reference_person.lower().find("none") != 0:
         return reference_person_point[1]
     return reference_person_point[0]
 
+
+def pointing_person_info(email, tel_num, fullname):
+    point = int((pointing_email_address(email, fullname) + pointing_tel_num(tel_num))/2)
+    return point
 
 
