@@ -192,7 +192,7 @@ def pointing_spell(candidate: Person):
     return spell_point[1]
 
 
-def pointing_reference_person(reference_person):
+def pointing_reference_person(reference_person, reference_person_position):
     if reference_person != "" and reference_person.lower().find("none") != 0:
         return reference_person_point[1]
     return reference_person_point[0]

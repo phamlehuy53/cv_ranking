@@ -62,7 +62,7 @@ FEATURE_SCORING = {
     },
     'reference_person': {
         'features': ['ReferencePerson', 'ReferencePersonPosition'],
-        'fn': None
+        'fn': pointing_reference_person
     },
 }
 
