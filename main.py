@@ -116,10 +116,6 @@ def main(args):
         if not json_dict:
             print(f"Reading {json_path} failed. Check again!")
             continue
-        # else:
-        #     print(f"Reading completed!")
-        #     scr = score(json_dict)
-        #     print(f"Score {scr}")
         dat.append(json_dict)
 
     df = pd.DataFrame(dat)

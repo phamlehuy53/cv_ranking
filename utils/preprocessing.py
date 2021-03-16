@@ -20,7 +20,6 @@ replaces_dict = dict(zip(INTAB, OUTTAB))
 
 
 # TODO: case-sensitive not implemented
-# def remove_sign(utf8_str):
 def remove_diacritic(utf8_str):
     return R.sub(lambda m: replaces_dict[m.group(0)], utf8_str)
 
@@ -39,6 +38,6 @@ def trim(text: str):
 
 def simplize(text: str):
     text = trim(text)
-    text = remove_sign(text)
+    text = remove_diacritic(text)
     text = remove_html_tag(text)
     return text

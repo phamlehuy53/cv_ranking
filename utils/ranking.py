@@ -52,7 +52,7 @@ def rank_diploma(in_text: str):
     else:
         return star
     # Check diploma
-    mtc_lv = match_keyword(gra_lv.keys(), pr_text)
+    mtc_lv = match_keyword(list(gra_lv.keys()), pr_text)
     if mtc_lv:
         mtc_lv.sort(reverse=True, key=lambda x: x[0])
         star = gra_lv[mtc_lv[0][1]]
