@@ -118,12 +118,6 @@ def pointing_update_cv(is_update):
     return is_update_point[0]
 
 
-def pointing_address(address_now):
-    if address_now is not None:
-        return address_now_point[1]
-    return address_now_point[0]
-
-
 def pointing_tel_num(tel_num):
     valid_check, phone = valid_phonenum(tel_num)
     if valid_check:
@@ -132,12 +126,14 @@ def pointing_tel_num(tel_num):
 
 
 def pointing_cv_image(cv_image):
-    if cv_image is not None and cv_image != "":
+    if cv_image != "" and cv_image.lower().find("none") != 0:
         return cv_image_point[1]
     return cv_image_point[0]
 
 
 def pointing_email_address(email_address, fullname):
+    if email_address.lower().find("none") == 0 or fullname.lower().find("none") == 0:
+        return 0
     email_address_point = 0
     fullname = fullname.lower()
     fullname = no_accent_vietnamese(fullname)
@@ -197,7 +193,7 @@ def pointing_spell(candidate: Person):
 
 
 def pointing_reference_person(reference_person):
-    if reference_person is not None:
+    if reference_person != "" and reference_person.lower().find("none") != 0:
         return reference_person_point[1]
     return reference_person_point[0]
 
