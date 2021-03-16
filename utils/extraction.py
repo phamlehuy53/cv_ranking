@@ -8,8 +8,6 @@ P = Pipeline('vietnamese')
 
 
 # %%
-
-
 def tokenize_sent(sentence: str) -> List[List[str]]:
     tokenized_text = P.tokenize(sentence, is_sent=True)
     return [token['text'] for token in tokenized_text['tokens']]
