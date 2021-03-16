@@ -18,7 +18,12 @@ from utils.extraction import match_keyword
 # from trankit import Pipeline
 from pyvi import ViTokenizer
 
-KWS_WORKING_AWARD = ['best', 'excellence', 'xuất sắc', 'giỏi']
+KWS_WORKING_AWARD = {
+    'match': ['best', 'excellence', 'xuất sắc', 'giỏi'],
+    'rank': [
+        
+    ]
+}
 # %%
 # TODO: validate tyep-engine. e.g not Unicode
 
@@ -94,4 +99,4 @@ def rank_working_award(in_text):
     if len(in_text) < 10 and 'None' in in_text:
         return 1
     corpus = split_props(in_text=in_text)
-
+    

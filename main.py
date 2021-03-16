@@ -17,7 +17,9 @@ FEATURE_SCORING = {
     },
     'introduction': {
         'feature': ['CanDob', 'SexCode', 'CanAddress', 'CanNationality', 'Interest', 'Strength', 'FutureGoals'],
+
         'fn': pointing_personal_summary
+
     },
     'experience': {
         'features': ['ExperienceYears'],
@@ -34,6 +36,7 @@ FEATURE_SCORING = {
     'graduated': {
         'features': ['LearningDiploma', 'Specialize'],
         'fn': pointing_diploma
+
     },
     'is_updated': {
         'features': ['IsUpdate'],
@@ -58,6 +61,7 @@ FEATURE_SCORING = {
     'language': {
         'features': ['LanguageCertificate'],
         'fn': pointing_language_certificate
+
     },
     'interest': {
         'features': ['Interest'],
@@ -65,8 +69,10 @@ FEATURE_SCORING = {
     },
     'reference_person': {
         'features': ['ReferencePerson', 'ReferencePersonPosition'],
+
         'fn': pointing_reference_person
     },
+
 
 }
 
@@ -120,6 +126,7 @@ def main(args):
         if not json_dict:
             print(f"Reading {json_path} failed. Check again!")
             continue
+        cv_scores = score(json_dict)
         dat.append(json_dict)
 
     df = pd.DataFrame(dat)
