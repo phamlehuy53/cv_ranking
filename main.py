@@ -6,7 +6,7 @@ from utils.json2csv import json2dict
 import argparse
 import pandas as pd
 
-NUMBER_OF_CRITERIA = 12
+NUMBER_OF_CRITERIA = 13
 
 FEATURE_SCORING = {
     'info': {
