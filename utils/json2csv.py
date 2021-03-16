@@ -64,7 +64,7 @@ def json2dict( json_path: str) -> Union[None, dict]:
         dict if successful
         None if failed
     """
-    with open(json_path, 'r') as fr:
+    with open(json_path, 'r', encoding="utf8") as fr:
         # text = fr.read()
         # text = text.replace('\\', SPEC_CHAR)
         # text = text.replace("\'", '\"')

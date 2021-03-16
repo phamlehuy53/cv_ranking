@@ -12,14 +12,12 @@ NUMBER_OF_CRITERIA = 12
 
 FEATURE_SCORING = {
     'info': {
-        'feature': ['CanEmail', 'CanTelNum', 'CanFullName'],
+        'features': ['CanEmail', 'CanTelNum', 'CanFullName'],
         'fn': pointing_person_info
     },
     'introduction': {
-        'feature': ['CanDob', 'SexCode', 'CanAddress', 'CanNationality', 'Interest', 'Strength', 'FutureGoals'],
-
+        'features': ['CanDob', 'SexCode', 'CanAddress', 'CanNationality', 'Interest', 'Strength', 'FutureGoals'],
         'fn': pointing_personal_summary
-
     },
     'experience': {
         'features': ['ExperienceYears'],
@@ -35,7 +33,7 @@ FEATURE_SCORING = {
     },
     'graduated': {
         'features': ['LearningDiploma', 'Specialize'],
-        'fn': pointing_diploma
+        'fn': pointing_learning_diploma
 
     },
     'is_updated': {
@@ -69,7 +67,6 @@ FEATURE_SCORING = {
     },
     'reference_person': {
         'features': ['ReferencePerson', 'ReferencePersonPosition'],
-
         'fn': pointing_reference_person
     },
 
@@ -96,8 +93,10 @@ def score(cv: Dict) -> Dict:
     star = 0
     res = {}
     for k in FEATURE_SCORING.keys():
-        features = FEATURE_SCORING[k]['feature']
+        features = FEATURE_SCORING[k]['features']
         score_fn = FEATURE_SCORING[k]['fn']
+        if not score_fn:
+            continue
         dat = [ cv[ftr] for ftr in features]
         c = score_fn(*dat)
         star += c
@@ -127,7 +126,7 @@ def main(args):
             print(f"Reading {json_path} failed. Check again!")
             continue
         cv_scores = score(json_dict)
-        dat.append(json_dict)
+        dat.append(cv_scores)
 
     df = pd.DataFrame(dat)
     if verbose:
