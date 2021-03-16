@@ -153,4 +153,9 @@ def pointing_learning_diploma(learning_diploma, specialize):
     return 0
 
 
+def pointing_language_certificate(language_certificate):
+    language_certificate = language_certificate.split(";")
+    if len(language_certificate) > 5:
+        return 5
+    return len(language_certificate)
 

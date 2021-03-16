@@ -31,7 +31,7 @@ FEATURE_SCORING = {
     },
     'graduated': {
         'features': ['LearningDiploma', 'Specialize'],
-        'fn': None
+        'fn': pointing_diploma
     },
     'is_updated': {
         'features': ['IsUpdate'],
@@ -55,7 +55,7 @@ FEATURE_SCORING = {
     },
     'language': {
         'features': ['LanguageCertificate'],
-        'fn': None
+        'fn': pointing_language_certificate()
     },
     'interest': {
         'features': ['Interest'],
