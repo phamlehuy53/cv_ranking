@@ -16,47 +16,6 @@ cv_image_point = [3, 5]
 interest_point = [0, 3, 5]
 spell_point = [3, 5]
 phone_number_point = [3,5]
-personal_summary_coefficient = {
-    'CanFullName': 1,
-    'CanDob': 1,
-    'CanAddress1': 1,
-    'CanEmail': 1,
-    'CanTelNum': 1,
-    'CanEthnic': 1,
-    'CanReligion': 1,
-    'CanNominee': 1,
-    'CanNationality': 1,
-    'CanIdentityName': 1,
-    'CanNearestWork': 1,
-    'Career': 1,
-}
-
-
-class PersonalSummary:
-    def __init__(self, CanFullName,
-                 CanDob,
-                 CanAddress1,
-                 CanEmail,
-                 CanTelNum,
-                 CanEthnic,
-                 CanReligion,
-                 CanNominee,
-                 CanNationality,
-                 CanIdentityName,
-                 CanNearestWork,
-                 Career):
-        self.Career = Career
-        self.CanNearestWork = CanNearestWork
-        self.CanIdentityName = CanIdentityName
-        self.CanNationality = CanNationality
-        self.CanNominee = CanNominee
-        self.CanReligion = CanReligion
-        self.CanEthnic = CanEthnic
-        self.CanTelNum = CanTelNum
-        self.CanEmail = CanEmail
-        self.CanAddress1 = CanAddress1
-        self.CanDob = CanDob
-        self.CanFullName = CanFullName
 
 
 def no_accent_vietnamese(s):
@@ -157,39 +116,24 @@ def pointing_email_address(email_address, fullname):
     return email_address_rank[0]
 
 
-def pointing_personal_summary(person_sum: PersonalSummary):
-    summary_point = 0
-    sum_of_coefficient = 0
-    for attr in PersonalSummary.__dict__.keys():
-        if attr.find("__") != -1:
-            continue
-        value = person_sum.__getattribute__(attr)
-        sum_of_coefficient = sum_of_coefficient + personal_summary_coefficient[attr]
-        if value is not None:
-            summary_point = summary_point + personal_summary_coefficient[attr]
-    return round(summary_point / sum_of_coefficient * 5, 0)
-
-
-def pointing_interest(interest):
-    if interest is not None:
-        return interest_point[2]
-    return interest_point[0]
-
-
-def check_spell(candidate_info):
-    if candidate_info == correct(candidate_info):
-        return True
-    return False
-
-
-def pointing_spell(candidate: Person):
-    for attr in Person.__dict__.keys():
-        if attr.find("__") != -1:
-            continue
-        value = candidate.__getattribute__(attr)
-        if not check_spell(candidate_info=value):
-            return spell_point[0]
-    return spell_point[1]
+def pointing_personal_summary(dob, sex, address, nation, interest, strength, future_goal):
+    point = 0
+    dob_pattern = "^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$"
+    if len(re.findall(dob_pattern, dob)) > 0:
+        point += 1
+    if sex.lower().find('none') != 0:
+        point += 1
+    if address.lower().find('none') != 0:
+        point += 1
+    if nation.lower().find('none') != 0:
+        point += 1
+    if interest.lower().find('none') != 0:
+        point += 2
+    if strength.lower().find('none') != 0:
+        point += 2
+    if future_goal.lower().find('none') != 0:
+        point += 2
+    return int(point/10*5)
 
 
 def pointing_reference_person(reference_person, reference_person_position):

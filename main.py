@@ -14,7 +14,7 @@ FEATURE_SCORING = {
     },
     'introduction': {
         'feature': ['CanDob', 'SexCode', 'CanAddress', 'CanNationality', 'Interest', 'Strength', 'FutureGoals'],
-        'fn': None
+        'fn': pointing_personal_summary
     },
     'experience': {
         'features': ['ExperienceYears'],
