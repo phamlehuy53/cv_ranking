@@ -5,12 +5,48 @@
 import os
 import glob
 import json
-import pandas as pd
+import pandas as pd 
 import sys
 from typing import Union
 # %%
 SPEC_CHAR = r"<~>"
+REPLACE_TEXT = [
+    ("'CanId'", '"CanId"'),
+    ("'CanFullName'", '"CanFullName"'),
+    ("'CanDob'", '"CanDob"'),
+    ("'SexCode'", '"SexCode"'),
+    ("'CanAddress'", '"CanAddress"'),
+    ("'CanEmail'", '"CanEmail"'),
+    ("'CanTelNum'", '"CanTelNum"'),
+    ("'CanImgCand'", '"CanImgCand"'),
+    ("'CanNationality'", '"CanNationality"'),
+    ("'CanFileCv'", '"CanFileCv"'),
+    ("'Interest'", '"Interest"'),
+    ("'Strength'", '"Strength"'),
+    ("'FutureGoals'", '"FutureGoals"'),
+    ("'LearningDiploma'", '"LearningDiploma"'),
+    ("'Specialize'", '"Specialize"'),
+    ("'ExperienceYears'", '"ExperienceYears"'),
+    ("'DesiredJob'", '"DesiredJob"'),
+    ("'Skill'", '"Skill"'),
+    ("'SoftSkill'", '"SoftSkill"'),
+    ("'LanguageCertificate'", '"LanguageCertificate"'),
+    ("'Diploma'", '"Diploma"'),
+    ("'IsUpdate'", '"IsUpdate"'),
+    ("'LearningAwards'", '"LearningAwards"'),
+    ("'WorkingAwards'", '"WorkingAwards"'),
+    ("'Project'", '"Project"'),
+    ("'ProjectPosition'", '"ProjectPosition"'),
+    ("'CompanyWorked'", '"CompanyWorked"'),
+    ("'CompanyPosition'", '"CompanyPosition"'),
+    ("'ReferencePerson'", '"ReferencePerson"'),
+    ("'ReferencePersonPosition'", '"ReferencePersonPosition"'),
+    ("'Point'", '"Point"'),
+    ("'JobTitle'", '"JobTitle"'),
+    ("'UpdateDate'", '"UpdateDate"')
+]
 
+# %%
 def json2dict( json_path: str) -> Union[None, dict]:
     """
     Read json file to dict
@@ -29,18 +65,30 @@ def json2dict( json_path: str) -> Union[None, dict]:
         None if failed
     """
     with open(json_path, 'r') as fr:
+        # text = fr.read()
+        # text = text.replace('\\', SPEC_CHAR)
+        # text = text.replace("\'", '\"')
+        # try:
+        #     js_obj = json.loads( text )
+        #     for k, v in js_obj.items():
+        #         if SPEC_CHAR in v:
+        #             js_obj[k] = v.replace(SPEC_CHAR, '\\')
+        # except Exception as e:
+        #     print(f"{e} - {json_path}")
+        #     # raise e
+        #     return None
+
         text = fr.read()
-        text = text.replace('\\', SPEC_CHAR)
-        text = text.replace("\'", '\"')
-        try:
-            js_obj = json.loads( text )
-            for k, v in js_obj.items():
-                if SPEC_CHAR in v:
-                    js_obj[k] = v.replace(SPEC_CHAR, '\\')
-        except Exception as e:
-            print(f"{e} - {json_path}")
-            # raise e
-            return None
+        # for repl_str in REPLACE_TEXT:
+        text = text.replace(r"{'", r'{"')
+        text = text.replace(r"'}", r'"}')
+        text = text.replace(r"':", r'":')
+        text = text.replace(r":'", r':"')
+        text = text.replace(r"',", r'",')
+        text = text.replace(r",'", r',"')
+        text = text.replace('\\', '\\\\')
+        # breakpoint()
+        js_obj = json.loads(text)
     return js_obj
 # %%
 def load_json( json_dir: str ):
