@@ -1,6 +1,6 @@
-from utils.person_info import Person
-from utils.score_cv import *
-from utils.ranking import *
+# from utils.person_info import Person
+# from utils.score_cv import *
+# from utils.ranking import *
 from typing import Dict
 from utils.json2csv import json2dict
 import argparse
@@ -8,62 +8,62 @@ import pandas as pd
 NUMBER_OF_CRITERIA = 12
 
 FEATURE_SCORING = {
-    'info': {
-        'feature': ['CanEmail', 'CanTelNum', 'CanFullName'],
-        'fn': pointing_person_info
-    },
-    'introduction': {
-        'feature': ['CanDob', 'SexCode', 'CanAddress', 'CanNationality', 'Interest', 'Strength', 'FutureGoals'],
-        'fn': None
-    },
-    'experience': {
-        'features': ['ExperienceYears'],
-        'fn': pointing_experience_year
-    },
-    'soft_skill': {
-        'features': ['SoftSkill'],
-        'fn': pointing_soft_skill
-    },
-    'skill': {
-        'features': ['Skill'],
-        'fn': pointing_skill
-    },
-    'graduated': {
-        'features': ['LearningDiploma', 'Specialize'],
-        'fn': None
-    },
-    'is_updated': {
-        'features': ['IsUpdate'],
-        'fn': pointing_update_cv
-    },
-    'learning_awards': {
-        'features': ['LearningAwards'],
-        'fn': None
-    },
-    'working_awards': {
-        'features': ['WorkingAwards'],
-        'fn': None
-    },
-    'diploma': {
-        'features': ['Diploma'],
-        'fn': pointing_diploma
-    },
-    'cv_image': {
-        'features': ['CanImgCand'],
-        'fn': pointing_cv_image
-    },
-    'language': {
-        'features': ['LanguageCertificate'],
-        'fn': None
-    },
-    'interest': {
-        'features': ['Interest'],
-        'fn': None
-    },
-    'reference_person': {
-        'features': ['ReferencePerson', 'ReferencePersonPosition'],
-        'fn': None
-    },
+    # 'info': {
+    #     'feature': ['CanEmail', 'CanTelNum', 'CanFullName'],
+    #     'fn': pointing_person_info
+    # },
+    # 'introduction': {
+    #     'feature': ['CanDob', 'SexCode', 'CanAddress', 'CanNationality', 'Interest', 'Strength', 'FutureGoals'],
+    #     'fn': None
+    # },
+    # 'experience': {
+    #     'features': ['ExperienceYears'],
+    #     'fn': pointing_experience_year
+    # },
+    # 'soft_skill': {
+    #     'features': ['SoftSkill'],
+    #     'fn': pointing_soft_skill
+    # },
+    # 'skill': {
+    #     'features': ['Skill'],
+    #     'fn': pointing_skill
+    # },
+    # 'graduated': {
+    #     'features': ['LearningDiploma', 'Specialize'],
+    #     'fn': None
+    # },
+    # 'is_updated': {
+    #     'features': ['IsUpdate'],
+    #     'fn': pointing_update_cv
+    # },
+    # 'learning_awards': {
+    #     'features': ['LearningAwards'],
+    #     'fn': None
+    # },
+    # 'working_awards': {
+    #     'features': ['WorkingAwards'],
+    #     'fn': None
+    # },
+    # 'diploma': {
+    #     'features': ['Diploma'],
+    #     'fn': pointing_diploma
+    # },
+    # 'cv_image': {
+    #     'features': ['CanImgCand'],
+    #     'fn': pointing_cv_image
+    # },
+    # 'language': {
+    #     'features': ['LanguageCertificate'],
+    #     'fn': None
+    # },
+    # 'interest': {
+    #     'features': ['Interest'],
+    #     'fn': None
+    # },
+    # 'reference_person': {
+    #     'features': ['ReferencePerson', 'ReferencePersonPosition'],
+    #     'fn': None
+    # },
 }
 
 
@@ -129,12 +129,12 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     group1 = parser.add_mutually_exclusive_group()
-    group1.add_argument("-d", "--dir", type=str, help="Path to direcotry contain CVs", action="store_true", default=None)
-    group1.add_argument("-f", "--fpath", type=str, help="Path to CV file", action="store_true", default=None)
+    group1.add_argument("-d", "--dir", help="Path to direcotry contain CVs", action="store_true", default=None)
+    group1.add_argument("-f", "--fpath", help="Path to CV file", action="store_true", default=None)
     
     group2 = parser.add_mutually_exclusive_group()
-    group2.add_argument('-o', "--output", type=str, help="Path to output csv", default=None)
-    group2.add_argument('-v', "--verbose", type=bool, help="Print to stdout", default=False)
+    group2.add_argument('-o', "--output", help="Path to output csv", default=None, action="store_true")
+    group2.add_argument('-v', "--verbose", help="Print to stdout", default=False, action="store_true")
     
     args = parser.parse_args()
 
