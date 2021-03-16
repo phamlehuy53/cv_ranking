@@ -5,6 +5,7 @@ from typing import Dict
 from utils.json2csv import json2dict
 import argparse
 import pandas as pd
+import os
 NUMBER_OF_CRITERIA = 12
 
 FEATURE_SCORING = {
@@ -96,10 +97,10 @@ def score(cv: Dict) -> Dict:
     return res
 
 def main(args):
-    json_path = args['fpath']
-    json_dir = args['dir']
-    output_file = args['output']
-    verbose = args['verbose']
+    json_path = args.fpath
+    json_dir = args.dir
+    output_file = args.output
+    verbose = args.verbose
     json_paths = []
     if json_path:
         json_paths.append(json_path)
@@ -129,12 +130,12 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     group1 = parser.add_mutually_exclusive_group()
-    group1.add_argument("-d", "--dir", help="Path to direcotry contain CVs", action="store_true", default=None)
-    group1.add_argument("-f", "--fpath", help="Path to CV file", action="store_true", default=None)
+    group1.add_argument("-d", "--dir", help="Path to direcotry contain CVs", default=None, type=str)
+    group1.add_argument("-f", "--fpath", help="Path to CV file", default=None, type=str)
     
     group2 = parser.add_mutually_exclusive_group()
-    group2.add_argument('-o', "--output", help="Path to output csv", default=None, action="store_true")
-    group2.add_argument('-v', "--verbose", help="Print to stdout", default=False, action="store_true")
+    group2.add_argument('-o', "--output", help="Path to output csv", default=None, type=str)
+    group2.add_argument('-v', "--verbose", help="Print to stdout", default=False, type=str)
     
     args = parser.parse_args()
 
