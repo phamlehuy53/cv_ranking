@@ -17,7 +17,7 @@ FEATURE_SCORING = {
         'features': ['ExperienceYears'],
         'fn': None
     },
-    'softskill': {
+    'soft_skill': {
         'features': ['SoftSkill'],
         'fn': None
     },
@@ -62,3 +62,5 @@ FEATURE_SCORING = {
         'fn': None
     },
 }
+
+
