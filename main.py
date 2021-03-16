@@ -55,7 +55,7 @@ FEATURE_SCORING = {
     },
     'language': {
         'features': ['LanguageCertificate'],
-        'fn': pointing_language_certificate()
+        'fn': pointing_language_certificate
     },
     'interest': {
         'features': ['Interest'],

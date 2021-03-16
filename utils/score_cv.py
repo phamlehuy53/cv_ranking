@@ -1,7 +1,5 @@
 import re
 from fuzzywuzzy import fuzz
-from utils.spell_checker import correct
-from utils.person_info import Person
 from utils.phone_extract import *
 
 email_address_rank = [0, 5]
