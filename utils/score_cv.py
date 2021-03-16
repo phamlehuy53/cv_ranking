@@ -147,3 +147,10 @@ def pointing_person_info(email, tel_num, fullname):
     return point
 
 
+def pointing_learning_diploma(learning_diploma, specialize):
+    if learning_diploma != "" and learning_diploma.lower().find("none") != 0:
+        return 5
+    return 0
+
+
+
