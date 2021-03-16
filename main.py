@@ -1,7 +1,8 @@
 from utils.person_info import Person
 from utils.score_cv import *
 from utils.ranking import *
-
+from typing import Dict
+from utils.json2csv import json2dict
 NUMBER_OF_CRITERIA = 12
 
 FEATURE_SCORING = {
@@ -53,4 +54,12 @@ def pointing_cv(candidate: Person):
     # point = point + rank_introduction()
     return point/NUMBER_OF_CRITERIA
 
-def 
+def score(cv: Dict):
+    star = 0
+    for k in FEATURE_SCORING.keys():
+        features = FEATURE_SCORING[k]['feature']
+        score_fn = FEATURE_SCORING[k]['fn']
+        dat = [ cv[ftr] for ftr in features]
+        star += score_fn(*dat)
+
+
