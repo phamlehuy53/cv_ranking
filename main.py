@@ -4,6 +4,25 @@ from utils.ranking import *
 
 NUMBER_OF_CRITERIA = 12
 
+FEATURE_SCORING = {
+    'info':{    
+        'feature': ['CanEmail', 'CanTelNum', 'CanFullName'],
+        'fn': None
+    },
+    'introduction':{
+        'feature': ['CanDob', 'SexCode', 'CanAddress', 'CanNationality', 'Interest', 'Strength', 'FutureGoals' ],
+        'fn': None
+    }, 
+    'experience':{
+        'features': ['ExperienceYears'], 
+        'fn': None
+    },
+    'softskill':{
+
+    }
+
+    
+}
 
 def pointing_cv(candidate: Person):
     point = 0
@@ -33,3 +52,5 @@ def pointing_cv(candidate: Person):
     point = point + pointing_tel_num(candidate.CanTelNum)
     # point = point + rank_introduction()
     return point/NUMBER_OF_CRITERIA
+
+def 
