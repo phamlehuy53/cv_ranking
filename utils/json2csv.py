@@ -79,7 +79,9 @@ def json2dict( json_path: str) -> Union[None, dict]:
         #     return None
 
         text = fr.read()
-        # for repl_str in REPLACE_TEXT:
+        
+        # TODO: 
+        text = text.replace(r'"', r"'")
         text = text.replace(r"{'", r'{"')
         text = text.replace(r"'}", r'"}')
         text = text.replace(r"':", r'":')
@@ -88,8 +90,12 @@ def json2dict( json_path: str) -> Union[None, dict]:
         text = text.replace(r",'", r',"')
         text = text.replace('\\', '\\\\')
         # breakpoint()
-        js_obj = json.loads(text)
-    return js_obj
+        try:
+            js_obj = json.loads(text)
+            return js_obj
+        except Exception as e:
+            print(e, json_path)
+    # return js_obj
 # %%
 def load_json( json_dir: str ):
     for root_dir, sub_dir, files in os.walk(json_dir):
