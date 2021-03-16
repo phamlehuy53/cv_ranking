@@ -7,6 +7,7 @@
 # Last Modified By  : phamlehuy53 <unknownsol98@gmail>
 # %%
 import os
+from typing import List
 import numpy as np
 import unicodedata
 from fuzzywuzzy import fuzz
@@ -17,11 +18,16 @@ from utils.extraction import match_keyword
 # from trankit import Pipeline
 from pyvi import ViTokenizer
 
+KWS_WORKING_AWARD = ['best', 'excellence', 'xuất sắc', 'giỏi']
 # %%
 # TODO: validate tyep-engine. e.g not Unicode
 
 JOB_KWS = set(map(lambda x: x[:-1], open('./data/Job-keywords.txt', 'r').readlines()))
 
+def split_props(in_text: str) -> List[str]:
+    res = in_text.split(r';')
+    res = list(map( lambda x: x.strip(), res))
+    return res
 
 def rank_diploma(in_text: str):
     star = 1
@@ -76,3 +82,16 @@ def rank_introduction(in_text: str):
     if len(matched_tokens) >= len(tokens) / 10:
         star = 5
     return star
+
+def rank_working_award(in_text):
+    '''
+    'None': 1*
+    'Team award': 2*
+    'Department award': 3*
+    'Area award': 4*
+    'Company award': 5*
+    '''
+    if len(in_text) < 10 and 'None' in in_text:
+        return 1
+    corpus = split_props(in_text=in_text)
+
