@@ -1,6 +1,6 @@
 # from utils.person_info import Person
 from utils.score_cv import *
-# from utils.ranking import *
+from utils.ranking import *
 from typing import Dict
 from utils.json2csv import json2dict
 import argparse
@@ -50,7 +50,7 @@ FEATURE_SCORING = {
     },
     'diploma': {
         'features': ['Diploma'],
-        'fn': pointing_diploma
+        'fn': rank_diploma
     },
     'cv_image': {
         'features': ['CanImgCand'],

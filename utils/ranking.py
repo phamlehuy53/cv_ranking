@@ -27,7 +27,7 @@ KWS_WORKING_AWARD = {
 # %%
 # TODO: validate tyep-engine. e.g not Unicode
 
-JOB_KWS = set(map(lambda x: x[:-1], open('./data/Job-keywords.txt', 'r').readlines()))
+JOB_KWS = set(map(lambda x: x[:-1], open('./data/Job-keywords.txt', 'r', encoding='utf-8').readlines()))
 
 def split_props(in_text: str) -> List[str]:
     res = in_text.split(r';')
