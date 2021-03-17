@@ -28,7 +28,13 @@ KWS_WORKING_AWARD = {
     }
 }
 KWS_LEARNING_AWARD = {
-    'match': ['giải thưởng']
+    'match': ['giải thưởng', 'giải', 'award', 'scholarship', 'giỏi'],
+    'rank':{
+        2: ['xã', 'phường', 'thị trấn'],
+        3: ['huyện', 'thị xã', 'quận', 'tỉnh'],
+        4: ['thành phố'],
+        5: ['quốc gia', 'quốc tế']
+    }
 }
 # %%
 # TODO: validate tyep-engine. e.g not Unicode
@@ -99,10 +105,10 @@ def rank_introduction(in_text: str):
 def rank_working_award(in_text: str) -> int:
     '''
     'None': 1*
-    'Team award': 2*
-    'Department award': 3*
-    'Area award': 4*
-    'Company award': 5*
+    'Giai thuong cap nhom': 2*
+    'Giai thuong cap phong, ban': 3*
+    'Giai thuong cap khu vuc': 4*
+    'Giai thuong cap cong ty': 5*
     '''
     in_text = in_text.lower()
     star = 1
@@ -137,13 +143,29 @@ def rank_learning_award(in_text: str) -> int:
     'Giai thuong cap Thanh pho': 4*
     'Giai thuong cap quoc gia': 5*
     '''
+    in_text = in_text.lower()
     star = 0
     if len(in_text) < 10 and 'none' in in_text:
         star = 0
         return star
 
+    match_thresh = 0.8
+    corpus = split_props(in_text=in_text)
+    
+    matched = False
+    tg_matches = KWS_LEARNING_AWARD['match']
+    ranks = KWS_LEARNING_AWARD['rank']
+    for prop in corpus:
+        breakpoint()
 
-
-
+        tokens = tokenize_sent(prop)
+        match_ratio, _, _ = approximate_best_match(tokens, tg_matches)
+        if match_ratio > match_thresh:
+            matched = True
+        if matched:
+            for k, v in ranks.items():
+                r, _, _ = approximate_best_match(v, tokens)
+                if r > match_thresh:
+                    star = max(star, k)
 
     return star
