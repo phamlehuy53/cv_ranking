@@ -32,7 +32,7 @@ FEATURE_SCORING = {
         'fn': pointing_skill
     },
     'graduated': {
-        'features': ['LearningDiploma', 'Specialize'],
+        'features': ['LearningDiploma'],
         'fn': pointing_learning_diploma
 
     },
