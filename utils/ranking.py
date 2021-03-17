@@ -7,22 +7,28 @@
 # Last Modified By  : phamlehuy53 <unknownsol98@gmail>
 # %%
 import os
-from typing import List
+from typing import List, Tuple
 import numpy as np
 import unicodedata
 from fuzzywuzzy import fuzz
 import re
 
 from utils.preprocessing import simplize, remove_html_tag, trim
-from utils.extraction import match_keyword
+from utils.extraction import match_keyword, tokenize_sent, approximate_best_match
 # from trankit import Pipeline
-from pyvi import ViTokenizer
+# from pyvi import ViTokenizer
 
 KWS_WORKING_AWARD = {
     'match': ['best', 'excellence', 'xuất sắc', 'giỏi'],
-    'rank': [
-        
-    ]
+    'rank': {
+        2: ['team', 'nhóm', 'giải thưởng', 'award']                           ,
+        3: ['phòng', 'ban']                           ,
+        4: ['khu vực', 'area', 'hội']                        ,
+        5: ['company', 'công ty', 'group', 'tập đoàn']
+    }
+}
+KWS_LEARNING_AWARD = {
+    'match': ['giải thưởng']
 }
 # %%
 # TODO: validate tyep-engine. e.g not Unicode
@@ -79,16 +85,18 @@ def rank_introduction(in_text: str):
     if len(in_text) < 10:
         star = 3
 
-    tokens = ViTokenizer.tokenize(in_text).split()
-    tokens = set([re.sub(r"_", ' ', tk) for tk in tokens])
+    tokens = set(tokenize_sent(in_text))
     # print(tokens)
     matched_tokens = tokens.intersection(JOB_KWS)
     # print(matched_tokens)
+    print(matched_tokens)
+
     if len(matched_tokens) >= len(tokens) / 10:
         star = 5
     return star
 
-def rank_working_award(in_text):
+# %%
+def rank_working_award(in_text: str) -> int:
     '''
     'None': 1*
     'Team award': 2*
@@ -96,7 +104,46 @@ def rank_working_award(in_text):
     'Area award': 4*
     'Company award': 5*
     '''
-    if len(in_text) < 10 and 'None' in in_text:
-        return 1
+    in_text = in_text.lower()
+    star = 1
+    if len(in_text) < 10 and 'none' in in_text:
+        star = 1
+        return star
+    
+    match_thresh = 0.8
     corpus = split_props(in_text=in_text)
     
+    matched = False
+    tg_matches = KWS_WORKING_AWARD['match']
+    ranks = KWS_WORKING_AWARD['rank']
+    for prop in corpus:
+        tokens = tokenize_sent(prop)
+        match_ratio, _, _ = approximate_best_match(tokens, tg_matches)
+        if match_ratio > match_thresh:
+            matched = True
+        if matched:
+            for k, v in ranks.items():
+                r, _, _ = approximate_best_match(v, tokens)
+                if r > match_thresh:
+                    star = max(star, k)
+
+    return star
+
+def rank_learning_award(in_text: str) -> int:
+    '''
+    'None': 0*
+    'Giai thuong cap xa': 2*
+    'Giai thuong cap huyen, tinh': 3*
+    'Giai thuong cap Thanh pho': 4*
+    'Giai thuong cap quoc gia': 5*
+    '''
+    star = 0
+    if len(in_text) < 10 and 'none' in in_text:
+        star = 0
+        return star
+
+
+
+
+
+    return star

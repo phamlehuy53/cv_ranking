@@ -38,6 +38,7 @@ def trim(text: str):
 
 def simplize(text: str):
     text = trim(text)
+    text = text.lower()
     text = remove_diacritic(text)
     text = remove_html_tag(text)
     return text

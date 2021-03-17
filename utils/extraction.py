@@ -2,15 +2,19 @@
 # -*- coding: utf-8 -*-
 import re
 from fuzzywuzzy import fuzz
-from trankit import Pipeline
-from typing import List
-P = Pipeline('vietnamese')
+# from trankit import Pipeline
+from typing import List, Tuple
+# P = Pipeline('vietnamese')
 
+from pyvi import ViTokenizer
 
 # %%
-def tokenize_sent(sentence: str) -> List[List[str]]:
-    tokenized_text = P.tokenize(sentence, is_sent=True)
-    return [token['text'] for token in tokenized_text['tokens']]
+def tokenize_sent(sentence: str) -> List[str]:
+    # tokenized_text = P.tokenize(sentence, is_sent=True)
+    # return [token['text'] for token in tokenized_text['tokens']]
+    tokens = ViTokenizer.tokenize(sentence).split()
+    tokens = list(map( lambda x: x.replace(r"_", " "), tokens ))
+    return tokens
 
 
 def match_keyword(words: list, sentence: str, thresh=0.5):
@@ -34,3 +38,16 @@ def match_keyword(words: list, sentence: str, thresh=0.5):
             continue
         res.append((bw[0], word, bw[1]))
     return res
+
+def approximate_best_match(src_words: List[str], tg_words: List[str]) -> Tuple[float, str, str]:
+    best_coef = 0
+    best_src = ''
+    best_tg = ''
+    for s in src_words:
+        for t in tg_words:
+            coef = fuzz.ratio(s, t)/100
+            if coef > best_coef:
+                best_coef = coef
+                best_src = s
+                best_tg = t
+    return (best_coef, best_src, best_tg)
