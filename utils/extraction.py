@@ -24,7 +24,7 @@ def match_keyword(words: list, sentence: str, thresh=0.5):
         sentence: input sentence to extract
         thresh: the similarity of 2 words to keep word
     Return:
-        res: list of (score, src_word, tg_word)
+        res: list of (score, extracted_word, tg_word)
     """
     words_sen = tokenize_sent(sentence)
     res = []

@@ -1,4 +1,5 @@
 # from utils.person_info import Person
+# %%
 from utils.score_cv import *
 from utils.ranking import *
 from typing import Dict
@@ -72,7 +73,7 @@ FEATURE_SCORING = {
 
 
 }
-
+# %%
 
 def score(cv: Dict) -> Dict:
     """

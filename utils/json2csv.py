@@ -126,7 +126,7 @@ def main(args):
 
     # breakpoint()
     df = pd.DataFrame(data)
-    df.to_csv(output_file)
+    df.to_csv(output_file, index=False, encoding='utf-8')
 
 if __name__ == "__main__":
     main(sys.argv)
