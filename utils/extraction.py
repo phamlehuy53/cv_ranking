@@ -45,7 +45,7 @@ def approximate_best_match(src_words: List[str], tg_words: List[str]) -> Tuple[f
     best_tg = ''
     for s in src_words:
         for t in tg_words:
-            coef = fuzz.ratio(s, t)/100
+            coef = fuzz.atio(s, t)/100
             if coef > best_coef:
                 best_coef = coef
                 best_src = s

@@ -9,4 +9,5 @@
 # 
 # TRKP = Pipeline('vietnamese')
 # 
-import os as o
+
+from .json2csv import json2dict # Read json from file to dict

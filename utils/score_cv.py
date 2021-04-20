@@ -1,6 +1,6 @@
 import re
 from fuzzywuzzy import fuzz
-from utils.phone_extract import *
+from cv_ranking.utils.phone_extract import *
 
 email_address_rank = [0, 5]
 experience_year_range = [[0, 1], [1, 2], [2, 3], [3, 5], [5, 100]]

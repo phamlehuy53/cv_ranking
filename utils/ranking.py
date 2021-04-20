@@ -13,10 +13,21 @@ import unicodedata
 from fuzzywuzzy import fuzz
 import re
 
-from utils.preprocessing import simplize, remove_html_tag, trim
-from utils.extraction import match_keyword, tokenize_sent, approximate_best_match
+from cv_ranking.utils.preprocessing import simplize, remove_html_tag, trim
+from cv_ranking.utils.extraction import match_keyword, tokenize_sent, approximate_best_match
+from cv_ranking import data as pkg_data
 # from trankit import Pipeline
 # from pyvi import ViTokenizer
+
+# CURRENT_DIR = '.'
+# if __file__:
+#     CURRENT_DIR = os.path.dirname(__file__)
+# print('Cur dir', __file__)
+try:
+    import importlib.resources as resources
+except ImportError:
+    # Try backported to PY<37 `importlib_resources`.
+    import importlib_resources as resources
 
 KWS_WORKING_AWARD = {
     'match': ['best', 'excellence', 'xuất sắc', 'giỏi'],
@@ -39,8 +50,8 @@ KWS_LEARNING_AWARD = {
 # %%
 # TODO: validate tyep-engine. e.g not Unicode
 
-JOB_KWS = set(map(lambda x: x[:-1], open('./data/Job-keywords.txt', 'r', encoding='utf-8').readlines()))
-
+# JOB_KWS = set(map(lambda x: x[:-1], open('data/Job-keywords.txt', 'r', encoding='utf-8').readlines()))
+JOB_KWS = set( resources.read_text(pkg_data, 'Job-keywords.txt', encoding='utf-8' ).splitlines())
 def split_props(in_text: str) -> List[str]:
     res = in_text.split(r';')
     res = list(map( lambda x: x.strip(), res))
